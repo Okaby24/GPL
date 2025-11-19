@@ -1,0 +1,25 @@
+::ng-deep .ag-header {
+  background: linear-gradient(to right, #2563eb, #581c87); /* blue → green gradient */
+  color: white;
+  font-weight: bold;
+}
+::ng-deep .ag-header-cell-label {
+  justify-content: center; /* center text horizontally */
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+::ng-deep .ag-row-hover {
+  background-color: #f9fafb !important; /* light gray on hover */
+  transition: background-color 0.3s ease-in-out;
+}
+
+::ng-deep .ag-theme-alpine .ag-cell-value .ag-cell .ag-cell-not-inline-editing .ag-cell-normal-height {
+  border: 3px solid #554455; 
+ 
+}
+
+::ng-deep .ag-theme-alpine .ag-row {
+  border-bottom: 1px solid #554455; /* Tailwind gray-200 for row separation */
+}
+

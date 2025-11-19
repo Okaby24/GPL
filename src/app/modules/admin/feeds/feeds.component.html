@@ -1,0 +1,248 @@
+<!-- 🔹 Navbar -->
+<nav class="flex justify-between items-center bg-gray-900 shadow p-4 text-gray-100">
+  <div class="flex items-center space-x-3 cursor-pointer" (click)="goToProfile('John Doe')">
+    <img
+      src="https://avatar.iran.liara.run/public"
+      alt="Profile"
+      class="w-10 h-10 rounded-full border border-gray-700"
+    />
+    <span class="font-medium text-gray-200">John Doe</span>
+  </div>
+
+  <input
+    type="text"
+    placeholder="Search posts..."
+    class="border border-gray-700 bg-gray-800 text-gray-200 rounded-lg px-4 py-2 w-1/3 placeholder-gray-500 focus:outline-none focus:border-blue-500"
+  />
+
+  <button
+    (click)="signOut()"
+    class="!text-white bg-red-600 px-4 py-2 rounded-lg hover:bg-red-700 cursor-pointer"
+  >
+    Sign Out
+  </button>
+</nav>
+
+<!-- 🔹 Main Feed Section -->
+<div class="container mx-auto px-4 py-6 bg-gray-950 min-h-screen text-gray-100">
+
+  <!-- Create Post -->
+  <div class="bg-gray-900 shadow rounded-lg p-4 mb-6">
+    <textarea
+      placeholder="What's on your mind?"
+      class="w-full bg-gray-800 border border-gray-700 rounded-lg p-2 text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500"
+      rows="3"
+    ></textarea>
+    <div class="flex justify-end mt-2 gap-3">
+      <button class="rounded-lg bg-green-600 !text-white px-4 py-2 cursor-pointer hover:bg-green-700">
+        Attach Files
+      </button>
+      <button
+      
+        class="bg-blue-600 !text-white px-4 py-2 rounded-lg hover:bg-blue-700 cursor-pointer"
+      >
+        Post
+      </button>
+    </div>
+  </div>
+
+  <!-- 🔹 Friend Suggestions Section -->
+ <div class="mb-10">
+<div class="border border-gray-800 rounded-lg p-5 bg-gray-900 mt-10 ">
+  <h2 class="text-lg font-semibold mb-4 !text-gray-100">People You May Know</h2>
+
+  @for (suggestion of friendSuggestions; track suggestion.id) {
+    <div class="flex items-center justify-between p-3 mb-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-all">
+      <div class="flex items-center">
+        <img
+          [src]="suggestion.avatar"
+          alt="Avatar"
+          class="w-10 h-10 rounded-full border border-gray-700 mr-3 cursor-pointer"
+          (click)="goToProfile(suggestion.name)"
+        />
+        <div>
+          <h4
+            class="font-medium !text-gray-100 cursor-pointer hover:underline"
+            (click)="goToProfile(suggestion.name)"
+          >
+            {{ suggestion.name }}
+          </h4>
+          <p class="text-gray-500 text-sm">{{ suggestion.mutualFriends }} mutual friends</p>
+        </div>
+      </div>
+
+      <button
+        class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg text-sm"
+        (click)="addFriend(suggestion.id)"
+      >
+        Add Friend
+      </button>
+    </div>
+  }
+</div>
+</div>
+
+  <!-- Posts Section -->
+   <h1 class="font-bold !text-gray-200 text-4xl">Posts</h1>
+  @if (loading) {
+    <!-- 🔸 Skeletons while loading -->
+    @for (skeleton of [1, 2, 3]; track skeleton) {
+      <div class="animate-pulse bg-gray-900 shadow rounded-lg p-4 mb-6">
+        <div class="flex items-center mb-3">
+          <div class="w-10 h-10 bg-gray-700 rounded-full mr-3"></div>
+          <div class="flex-1">
+            <div class="h-3 bg-gray-700 rounded w-1/3 mb-2"></div>
+            <div class="h-2 bg-gray-800 rounded w-1/4"></div>
+          </div>
+        </div>
+        <div class="h-3 bg-gray-700 rounded mb-2"></div>
+        <div class="h-3 bg-gray-800 rounded w-5/6"></div>
+      </div>
+    }
+  } @else {
+    <!-- 🔸 Loaded Posts -->
+    @for (post of posts; track post.id) {
+      <div class="bg-gray-900 shadow rounded-lg p-4 mb-6 flex justify-between items-end">
+        <div>
+          <div class="flex items-center mb-3">
+            <img
+              src="https://avatar.iran.liara.run/public"
+              class="w-10 h-10 rounded-full mr-3 border border-gray-700 cursor-pointer"
+              (click)="goToProfile(post.author)"
+              alt="Profile"
+            />
+            <div (click)="goToProfile(post.author)" class="cursor-pointer">
+              <h4 class="font-medium !text-gray-200">{{ post.author }}</h4>
+              <p class="!text-gray-500 text-sm">{{ post.time }} ago</p>
+            </div>
+          </div>
+          <p class="text-gray-300">{{ post.content }}</p>
+
+          @if (post.images?.length === 1) {
+            <div class="grid grid-cols-1 gap-2 mt-3">
+              <img [src]="post.images[0]" class="w-full rounded-lg object-cover" />
+            </div>
+          } @else if (post.images?.length === 2) {
+            <div class="grid grid-cols-2 gap-2 mt-3">
+              @for (img of post.images; track img) {
+                <img [src]="img" class="w-full h-64 object-cover rounded-lg" />
+              }
+            </div>
+          } @else if (post.images?.length === 3) {
+            <div class="grid grid-cols-2 gap-2 mt-3">
+              <img [src]="post.images[0]" class="w-full h-64 object-cover rounded-lg col-span-2" />
+              <img [src]="post.images[1]" class="w-full h-48 object-cover rounded-lg" />
+              <img [src]="post.images[2]" class="w-full h-48 object-cover rounded-lg" />
+            </div>
+          } @else if (post.images?.length > 3) {
+            <div class="grid grid-cols-2 gap-2 mt-3">
+              @for (img of post.images.slice(0, 3); track img) {
+                <img [src]="img" class="w-full h-60 object-cover rounded-lg" />
+              }
+
+              @if (!post.expanded) {
+                <div
+                  class="relative w-full h-60 rounded-lg overflow-hidden cursor-pointer"
+                  (click)="toggleExpand(post)"
+                >
+                  <img [src]="post.images[3]" class="w-full h-full object-cover" />
+                  <div
+                    class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center text-white text-3xl font-semibold"
+                  >
+                    +{{ post.images.length - 4 }}
+                  </div>
+                </div>
+              }
+            </div>
+
+            @if (post.expanded) {
+              <div class="grid grid-cols-2 gap-2 mt-3">
+                @for (img of post.images.slice(4); track img) {
+                  <img [src]="img" class="w-full h-60 object-cover rounded-lg" />
+                }
+              </div>
+            }
+          }
+        </div>
+
+        <div class="flex gap-5">
+          <span
+            class="flex gap-2 justify-center items-center text-base font-semibold cursor-pointer text-blue-400 hover:bg-gray-800 p-2 rounded-xl"
+            (click)="openCommentDialog(post)"
+          >
+            <i-lucide [img]="comment"></i-lucide>
+            Comments
+            <span class="text-blue-300 border border-gray-700 rounded-xl p-2">233</span>
+          </span>
+          <span
+            class="flex gap-2 justify-center items-center text-base font-semibold cursor-pointer text-green-400 hover:bg-gray-800 p-2 rounded-xl"
+          >
+            <i-lucide [img]="like"></i-lucide>
+            Likes
+            <span class="text-green-300 border border-gray-700 rounded-xl p-2">1</span>
+          </span>
+          <span
+            class="flex gap-2 justify-center items-center text-base font-semibold cursor-pointer text-red-400 hover:bg-gray-800 p-2 rounded-xl"
+          >
+            <i-lucide [img]="dislike"></i-lucide>
+            Dislikes
+            <span class="text-red-300 border border-gray-700 rounded-xl p-2">3000</span>
+          </span>
+        </div>
+      </div>
+    }
+  }
+</div>
+
+
+
+<!-- 🔹 Comments Dialog -->
+<ng-template #submitComment let-data let-dialogRef="dialogRef">
+  <div class="flex flex-col gap-8 justify-center bg-gray-900 text-gray-100 p-10 rounded-xl">
+    <span class="font-semibold text-lg text-gray-200 border-b border-gray-700 pb-2">Comments</span>
+
+    <div class="flex flex-col gap-4 max-h-96 overflow-y-auto pr-2">
+      <div class="flex items-start gap-3 bg-gray-800 p-3 rounded-lg">
+        <img
+          src="https://avatar.iran.liara.run/public"
+          alt="Profile"
+          class="w-10 h-10 rounded-full border border-gray-700"
+        />
+        <div class="flex flex-col">
+          <span class="font-medium text-gray-300">Jane Smith</span>
+          <p class="text-gray-400 text-sm">Great post! 💪</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-3 bg-gray-800 p-3 rounded-lg">
+        <img
+          src="https://avatar.iran.liara.run/public"
+          alt="Profile"
+          class="w-10 h-10 rounded-full border border-gray-700"
+        />
+        <div class="flex flex-col">
+          <span class="font-medium text-gray-300">John Doe</span>
+          <p class="text-gray-400 text-sm">Looks awesome 😎</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3 mt-4">
+      <img
+        src="https://avatar.iran.liara.run/public"
+        alt="Profile"
+        class="w-10 h-10 rounded-full border border-gray-700"
+      />
+      <input
+        type="text"
+        placeholder="Write a comment..."
+        class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500"
+      />
+      <button
+        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
+      >
+        Send
+      </button>
+    </div>
+  </div>
+</ng-template>

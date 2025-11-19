@@ -1,0 +1,64 @@
+<div class="flex items-center gap-5 w-full">
+  <ng-container *ngIf="actions.includes('view')">
+    <div
+      class="flex justify-center items-center cursor-pointer mt-4"
+      (click)="onActionClick('view')"
+    >
+      <!-- <img src="/icons/edit.svg" alt="View Details" class="icon-size-6" /> -->
+      <mat-icon
+        svgIcon="esc_icons:remove_red_eye"
+        class="icon-size-6 text-primary-500"
+      ></mat-icon>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="actions.includes('edit')">
+    <div
+      class="flex justify-center items-center cursor-pointer mt-4"
+      (click)="onActionClick('edit')"
+    >
+      <img src="icons/edit.svg" alt="Plus" class="icon-size-5" />
+    </div>
+  </ng-container>
+  <ng-container *ngIf="actions.includes('resetPassword')">
+    <div
+      class="flex justify-center items-center cursor-pointer mt-4"
+      (click)="onActionClick('resetPassword')"
+    >
+      <img src="icons/resetIcon.svg" alt="block" class="icon-size-5" />
+    </div>
+  </ng-container>
+  <ng-container *ngIf="actions.includes('print')">
+    <div
+      class="flex justify-center items-center cursor-pointer bg-white border border-blueGray rounded-md p-2 mt-4"
+      (click)="onActionClick('print')"
+    >
+      <mat-icon
+        svgIcon="esc_icons:printer"
+        class="icon-size-5 text-mint-600"
+      ></mat-icon>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="actions.includes('delete')">
+    <div
+      class="flex justify-center items-center cursor-pointer mt-4"
+      (click)="onActionClick('delete')"
+    >
+      <!-- <img src="icons/delete.svg" alt="block" class="icon-size-6" /> -->
+      <mat-icon
+        svgIcon="esc_icons:delete_outline"
+        class="icon-size-6 text-red-500"
+      ></mat-icon>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="actions.includes('approve')">
+    <div class="flex justify-center items-center cursor-pointer">
+      <button
+        class="bg-green-600 px-4 rounded-md !text-white"
+        (click)="onActionClick('approve')"
+      >
+        Approve
+      </button>
+    </div>
+  </ng-container>
+</div>

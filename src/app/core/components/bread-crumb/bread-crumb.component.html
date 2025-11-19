@@ -1,0 +1,25 @@
+<nav class="text-sm font-medium text-primary-500" aria-label="Breadcrumb">
+  <ol class="list-reset flex gap-2">
+    @for (item of breadcrumbs; track $index; let last = $last) {
+      <li class="flex items-center gap-2" *ngIf="item">
+        <ng-container *ngIf="item.url && !last">
+          <a
+            [routerLink]="item.url"
+            class="hover:underline hover:text-primary-500"
+          >
+            {{ item.label | transloco }}
+          </a>
+
+          <span class="">&gt;</span>
+        </ng-container>
+
+        <ng-container *ngIf="last || !item.url">
+          <span
+            class="font-medium text-primary-700 rounded-full p-2 px-4 bg-primary-100"
+            >{{ item.label | transloco }}</span
+          >
+        </ng-container>
+      </li>
+    }
+  </ol>
+</nav>

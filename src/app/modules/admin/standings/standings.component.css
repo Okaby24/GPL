@@ -1,0 +1,24 @@
+/* Gradient header */
+::ng-deep .ag-header {
+  background: linear-gradient(to right, #581c87, #2563eb) !important;
+  color: white !important;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Center header labels */
+::ng-deep .ag-header-cell-label {
+  justify-content: center;
+}
+
+/* Row hover effect */
+::ng-deep .ag-row-hover {
+  background-color: #f9fafb !important;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Bold usernames */
+::ng-deep .ag-cell[col-id="username"] {
+  font-weight: 600;
+  color: #2563eb;
+}
