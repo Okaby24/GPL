@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # FplGuess
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.0.
@@ -57,3 +58,7 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+=======
+# GPL
+GPL (Guessing Premier League) is a web app built with Angular 20 where users predict Premier League match scores. Inspired by Fantasy Premier League, it features leaderboards, stats, and a sleek responsive design for football fans to test their prediction skills.
+>>>>>>> 3c6d6bbcbfb641e363e8d0f083bfeac31f3a9b24
