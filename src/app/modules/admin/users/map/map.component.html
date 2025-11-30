@@ -1,5 +1,30 @@
 
 <!-- world-map.component.html -->
-<div class="map-wrapper">
+<!-- <div class="map-wrapper">
   <div class="svg-container" [innerHTML]="svgContent"></div>
+</div> -->
+
+
+<!-- <div class="svg-container" [innerHTML]="svgContent" #svgWrapper></div>
+<div
+  class="tooltip"
+  [ngStyle]="{ top: tooltipY + 'px', left: tooltipX + 'px', display: tooltipVisible ? 'block' : 'none' }"
+>
+  {{ tooltipText }}
+</div> -->
+
+
+<div class="svg-container" [innerHTML]="svgContent" #svgWrapper></div>
+
+<div
+  class="fixed bg-white p-4 rounded-lg shadow-lg w-[200px] z-[2000] hidden transition-all duration-300 ease-in-out  !bg-linear-to-r !from-amber-500/60 !to-gray-400/50 !text-yellow-100 !bg-transparent"
+  [class.!block]="infoVisible"
+  [ngStyle]="{ top: infoY + 'px', left: infoX + 'px' }"
+>
+  <h3 class="!text-yellow-300">{{ selectedCountry }}</h3>
+  
+  <div class="">
+    <p>{{ slectedCountryProjects }}</p>
+  </div>
 </div>
+
