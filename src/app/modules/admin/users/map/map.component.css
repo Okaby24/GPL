@@ -6,3 +6,36 @@
 .country:hover {
   fill: #FFD700; 
 }
+.svg-container {
+  position: relative;
+}
+
+.tooltip {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  pointer-events: none;
+  font-size: 12px;
+  z-index: 1000;
+}
+.country-info {
+  position: fixed;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  display: none;
+  width: 200px;
+  z-index: 2000;
+
+  &.visible {
+    display: block;
+  }
+
+  h3 {
+    margin: 0 0 8px;
+    font-weight: bold;
+  }
+}
