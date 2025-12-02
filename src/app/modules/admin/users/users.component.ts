@@ -3,12 +3,13 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ColDef } from 'ag-grid-community';
 import { RollingComponent } from "./rolling/rolling.component";
 import { MapComponent } from "./map/map.component";
+import { DragDropComponent } from "./drag-drop/drag-drop.component";
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
-  imports: [AgGridModule, RollingComponent, MapComponent]
+  imports: [AgGridModule, RollingComponent, MapComponent, DragDropComponent]
 })
 export class UsersComponent implements OnInit{
   // Column definitions
